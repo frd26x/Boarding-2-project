@@ -9,11 +9,8 @@
   <title>{{title}}</title>
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
-<<<<<<< HEAD
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-=======
->>>>>>> a09d1701acd80fa03d5d53895ad5add26ce91d5d
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/style.css" />
@@ -22,7 +19,6 @@
 <body>
   {{!-- <ul class="homepagebg"> --}}
 
-<<<<<<< HEAD
   {{!-- <nav>
     
     {{#if user}}
@@ -70,41 +66,6 @@
       </li>
     </ul>
   </nav>
-=======
-  <nav class="navbar navbar-expand-lg navbar-light bg-info text-dark">
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      {{#if user}}
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/profile/{{user._id}}">{{user.username}}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/logout">Logout</a>
-      </li>
-       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Events
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/add-event">Add Events</a>
-          <a class="dropdown-item" href="/events">All Events</a>
-        </div>
-      </li>
-      {{else}}
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/login">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/auth/signup">Signup</a>
-      </li>
-      {{/if}}
-    </ul>
-  </div>
-</nav>
->>>>>>> a09d1701acd80fa03d5d53895ad5add26ce91d5d
 
   {{else}}
   <nav class="navbar navbar-light bg-light">
