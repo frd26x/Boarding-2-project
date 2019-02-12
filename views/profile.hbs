@@ -10,9 +10,10 @@
 <a href="/update-range-user" id="link-range-update" class="btn btn-success">Submit</a>
 
 
+<div class="d-flex justify-content-center flex-wrap">
+<div class="card ml-4 mt-4 mb-4" style="width: 18rem;">
 <h2 class="pt-5">Joined Events</h2>
   <hr>
-<div class="card" style="width: 100%;">
   {{#each join}}
   <div class="card-body">
     <h5 class="card-title">{{_event._game.name}}</h5>
@@ -24,9 +25,9 @@
   </div>
   {{/each}}
 </div>
+<div class="card ml-4 mt-4 mb-4" style="width: 18rem;">
 <h2 class="pt-5">My Events</h2> 
 <hr>
-<div class="card" style="width: 100%">
   {{#each event}}
   <div class="card-body">
     <h5 class="card-title">{{_game.name}}</h5>
@@ -38,7 +39,7 @@
   </div>
   {{/each}}
   </div>  
-
+</div>
   <script>
     
    var output = document.getElementById('rangeValue')
