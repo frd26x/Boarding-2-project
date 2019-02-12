@@ -274,5 +274,42 @@ router.get("/sort-by-distance", (req, res,next) => {
   
 })
 
+//GET find by game-name from search using gameId
+router.get("/events-byname", (req, res, next) => {
+  console.log('req.query',req.query)
+  Game.find({name:req.query.game })
+  .then(game=>{
+    
+    Promise.all([
+      Join.find({ _user: req.user._id }).lean(),
+      Event.find({_game:game[0]._id})
+        .populate("_game")
+        .populate("_user")
+        .lean()
+        
+          
+        
+    ])
+      .then(([usersEvents, allEvents]) => {
+        res.render("events", {
+          allEvents: allEvents.map(event => ({
+            ...event,
+            isJoined: usersEvents.some(
+              join =>
+                join._user.equals(req.user._id) && join._event.equals(event._id)
+            ),
+            isOwner: event._user._id.equals(req.user._id) ? true : false
+          })),
+          errorMessage: req.flash("errorMessage")[0]
+        });
+      })
+      .catch(err => console.log(err));
+
+  })
+  
+});
+
+
+
 
 module.exports = router;

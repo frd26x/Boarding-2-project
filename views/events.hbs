@@ -1,32 +1,37 @@
 <a id='sort-by-distance' href="/sort-by-distance">sort-by-distance</a>
 <button id="get-pos">get position</button>
+<form action="/events-byname" method="GET">
+  <label for="search-by-name">Enter name: </label>
+  <input id="search-by-name" type="text" name="game" value="Default name for team.">
+  <input type="submit" value="Search">
+</form>
 {{#each allEvents}}
-  <div class="card-body">
-    <h5 class="card-title">{{_game.name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{{address}}</h6>
-    <p class="card-text"><strong>Description:</strong> {{description}}</p>
-    <p class="card-text"> <strong>Date:</strong> {{date}}</p>
-    {{!-- <p class="card-text"> <strong>Time:</strong> {{time}}</p> --}}
+<div class="card-body text-center style=width: 18rem; pp-5">
+  <h5 class="card-title">{{_game.name}}</h5>
+  <h6 class="card-subtitle mb-2 text-muted">{{address}}</h6>
+  <p class="card-text"><strong>Description:</strong> {{description}}</p>
+  <p class="card-text"> <strong>Date:</strong> {{date}}</p>
+  {{!-- <p class="card-text"> <strong>Time:</strong> {{time}}</p> --}}
 
-    <p class="card-text"><strong>Slots:</strong> {{slot}}</p>
-    <p class="card-text"> <strong>Host:</strong> {{_user.username}}</p>
-    {{#if this.isJoined}}
-    <a href="/cancel-event-join/{{this._id}}" class="btn btn-danger">Cancel</a>
-    {{else}}
-    <a href="/join-event/{{this._id}}" class="btn btn-success">Join</a>
-    {{/if}}
-  </div>
-  {{/each}}
-  </div>  
+  <p class="card-text"><strong>Slots:</strong> {{slot}}</p>
+  <p class="card-text"> <strong>Host:</strong> {{_user.username}}</p>
+  {{#if this.isJoined}}
+  <a href="/cancel-event-join/{{this._id}}" class="btn btn-danger">Cancel</a>
+  {{else}}
+  <a href="/join-event/{{this._id}}" class="btn btn-success">Join</a>
+  {{/if}}
+</div>
+{{/each}}
+
 
 
 <script>
-  document.getElementById('get-pos').onclick = function(){
- navigator.geolocation.getCurrentPosition(function(pos){
- console.log(pos)
- let position = `/sort-by-distance?lng=${pos.coords.longitude}&lat=${pos.coords.latitude}`
- document.getElementById('sort-by-distance').setAttribute("href", position)
-})
+  document.getElementById('get-pos').onclick = function () {
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      console.log(pos)
+      let position = `/sort-by-distance?lng=${pos.coords.longitude}&lat=${pos.coords.latitude}`
+      document.getElementById('sort-by-distance').setAttribute("href", position)
+    })
   }
- 
+
 </script>
