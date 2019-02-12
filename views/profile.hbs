@@ -1,9 +1,14 @@
 <h1 class="pt-5">Profile</h1>
 <p>{{user.username}}</p> <br>
 <p>registered since {{user.timestamps.createdAt}}</p>
+
+<div class="flex-column d-flex justify-content-center">
 <label for="customRange1">Distance</label>
 <p id="rangeValue"></p>
 <input type="range" class="custom-range" id="customRange1" value="10" min="1" max="100">
+</div>
+<a href="#" class="btn btn-success">Submit</a>
+
 
 <h2 class="pt-5">Joined Events</h2>
   <hr>
