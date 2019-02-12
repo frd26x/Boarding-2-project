@@ -1,13 +1,13 @@
 <h1 class="pt-5">Profile</h1>
 <p>{{user.username}}</p> <br>
-<p>registered since {{user.timestamps.createdAt}}</p>
+<p>registered since {{user.created_at}}</p>
 
 <div class="flex-column d-flex justify-content-center">
 <label for="customRange1">Distance</label>
 <p id="rangeValue"></p>
 <input type="range" class="custom-range" id="customRange1" value="10" min="1" max="100">
 </div>
-<a href="#" class="btn btn-success">Submit</a>
+<a href="/update-range-user" id="link-range-update" class="btn btn-success">Submit</a>
 
 
 <h2 class="pt-5">Joined Events</h2>
@@ -49,5 +49,8 @@
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
   output.innerHTML = this.value;
+  document.getElementById('link-range-update').setAttribute("href", `/update-maxDistance-user/${this.value}`)
 }
+
+
   </script>

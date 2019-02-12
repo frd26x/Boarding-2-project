@@ -1,37 +1,64 @@
-<a id='sort-by-distance' href="/sort-by-distance">sort-by-distance</a>
-<button id="get-pos">get position</button>
+
+
+{{!-- <form action="/events-byname" method="GET">
+    <label for="search-by-name">Enter name: </label>
+    <input id="search-by-name" type="text" name="game" value="Default name for team.">
+    <input type="submit" value="Search">
+</form> --}}
+
 <form action="/events-byname" method="GET">
-  <label for="search-by-name">Enter name: </label>
-  <input id="search-by-name" type="text" name="game" value="Default name for team.">
-  <input type="submit" value="Search">
-</form>
-{{#each allEvents}}
-<div class="card-body text-center style=width: 18rem; pp-5">
-  <h5 class="card-title">{{_game.name}}</h5>
-  <h6 class="card-subtitle mb-2 text-muted">{{address}}</h6>
-  <p class="card-text"><strong>Description:</strong> {{description}}</p>
-  <p class="card-text"> <strong>Date:</strong> {{date}}</p>
-  {{!-- <p class="card-text"> <strong>Time:</strong> {{time}}</p> --}}
+  <div class="form-group d-flex flex-row justify-content-center align-self-center mt-5">
+    <button id="get-pos" class="btn btn-primary mb-2 mr-3 ml-4"><i class="fas fa-map-marker-alt"></i></button>
+    <input type="text" class="form-control w-50 text-center" name="game" placeholder="Enter Game Filter">
+    <button type="submit" class="btn btn-primary mb-2 ml-3">Enter</button>
+  </div>
+  <div class="text-center">
+<div class="dropdown show">
+  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort your search
+  </a>
 
-  <p class="card-text"><strong>Slots:</strong> {{slot}}</p>
-  <p class="card-text"> <strong>Host:</strong> {{_user.username}}</p>
-  {{#if this.isJoined}}
-  <a href="/cancel-event-join/{{this._id}}" class="btn btn-danger">Cancel</a>
-  {{else}}
-  <a href="/join-event/{{this._id}}" class="btn btn-success">Join</a>
-  {{/if}}
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a id='sort-by-distance' href="/sort-by-distance" class="dropdown-item">By distance</a>
+    <a class="dropdown-item" href="/sort-by-date">By date</a>
+  </div>
 </div>
-{{/each}}
+  </div>
+</form>
+
+<div class="d-flex justify-content-center flex-wrap">
+{{#each allEvents}}
+<div class="card ml-4 mt-4 mb-4" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{_game.name}}</h5>
+    <p class="card-text">{{address}}</p>
+    <p class="card-text"><strong>Description:</strong> {{description}}</p>
+    <p class="card-text"> <strong>Date:</strong> {{date}}</p>
+    {{!-- <p class="card-text"> <strong>Time:</strong> {{time}}</p> --}}
+
+    <p class="card-text"><strong>Slots:</strong> {{slot}}</p>
+    <p class="card-text"> <strong>Host:</strong> {{_user.username}}</p>
+    <div class="card-body">
+      <a href="/event/{{_id}}" class="card-link mr-5">Details</a>
+      {{#if this.isJoined}}
+      <a href="/cancel-event-join/{{this._id}}" class="btn btn-danger">Cancel</a>
+      {{else}}
+      <a href="/join-event/{{this._id}}" class="btn btn-success ml-4">Join</a>
+      {{/if}}
+    </div>
+</div>  
+</div>  
+    {{/each}}
+  </div>
 
 
+  <script>
+    document.getElementById('get-pos').onclick = function () {
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        console.log(pos)
+        let position = `/sort-by-distance?lng=${pos.coords.longitude}&lat=${pos.coords.latitude}`
+        document.getElementById('sort-by-distance').setAttribute("href", position)
+      })
+    }
 
-<script>
-  document.getElementById('get-pos').onclick = function () {
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      console.log(pos)
-      let position = `/sort-by-distance?lng=${pos.coords.longitude}&lat=${pos.coords.latitude}`
-      document.getElementById('sort-by-distance').setAttribute("href", position)
-    })
-  }
-
-</script>
+  </script>

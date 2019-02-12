@@ -99,6 +99,7 @@ router.get("/events", (req, res, next) => {
 
 //GET event sorted by distance USER coordinates
 router.get("/events-user-coord", (req, res, next) => {
+  const maxDistance = req.user.maxDistance * 1000
   Promise.all([
     Join.find({ _user: req.user._id }).lean(),
     Event.find({
@@ -107,8 +108,8 @@ router.get("/events-user-coord", (req, res, next) => {
           $geometry: {
             type: 'Point',
             coordinates: req.user.loc.coordinates
-          }
-          // $maxDistance: 999999999999999999999999 // in meters
+          },
+          $maxDistance: maxDistance // in meters
         }
       }
     })
@@ -134,6 +135,7 @@ router.get("/events-user-coord", (req, res, next) => {
 
 //GET events SORTED by date
 router.get("/events-sorted-by-date", (req, res, next) => {
+  const maxDistance = req.user.maxDistance * 1000
   Promise.all([
     Join.find({ _user: req.user._id }).lean(),
     Event.find({
@@ -143,7 +145,7 @@ router.get("/events-sorted-by-date", (req, res, next) => {
             type: 'Point',
             coordinates: req.user.loc.coordinates
           },
-          $maxDistance: 10000 // in meters
+          $maxDistance: maxDistance
         }
       }
     }).sort({date:1})
@@ -237,7 +239,7 @@ router.get("/profile/:userId", (req, res, next) => {
 
 //GET sort by distance from event page
 router.get("/sort-by-distance", (req, res,next) => {
-  console.log('req.query',req.query)
+ const maxDistance = req.user.maxDistance * 1000
   var { lng,lat } = req.query
   Promise.all([
     Join.find({ _user: req.user._id }).lean(),
@@ -247,8 +249,8 @@ router.get("/sort-by-distance", (req, res,next) => {
           $geometry: {
             type: 'Point',
             coordinates: [lng,lat]
-          }
-          // $maxDistance: 999999999999999999999999 // in meters
+          },
+          $maxDistance: maxDistance
         }
       }
     })
@@ -276,7 +278,7 @@ router.get("/sort-by-distance", (req, res,next) => {
 
 //GET find by game-name from search using gameId
 router.get("/events-byname", (req, res, next) => {
-  console.log('req.query',req.query)
+  
   Game.find({name:req.query.game })
   .then(game=>{
     
@@ -308,6 +310,16 @@ router.get("/events-byname", (req, res, next) => {
   })
   
 });
+
+//GET update POSITION USER
+router.get('/update-maxDistance-user/:range',(req,res)=>{
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $set: { maxDistance: req.params.range } })
+    .then(()=>{
+      res.redirect(`/profile/${req.user._id}`)
+    })
+})
 
 
 

@@ -11,7 +11,8 @@ const userSchema = new Schema({
   loc:{
     type: {type:String, enum:['Point'], default: "Point"},
     coordinates: [Number]
-  }
+  },
+  maxDistance:Number
 }, {
   timestamps: {
     createdAt: 'created_at',
