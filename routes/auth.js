@@ -3,6 +3,7 @@ const passport = require('passport');
 const transporter = require('../configs/transporter');
 const router = express.Router();
 const User = require("../models/User");
+const mapbox = require("../public/javascripts/geocode");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -35,6 +36,10 @@ router.post("/signup", (req, res, next) => {
   const email = req.body.email;
   if (username === "" || password === "" || email === "") {
     res.render("auth/signup", { message: "Indicate username, password and email" });
+  const position = req.body.position;
+
+  if (username === "" || password === "") {
+    res.render("auth/signup", { message: "Indicate username and password" });
     return;
   }
 
@@ -83,8 +88,28 @@ router.post("/signup", (req, res, next) => {
       .catch(err => {
         res.render("auth/signup", { message: "Something went wrong" });
       })
-  });
-});
+    mapbox(
+      "pk.eyJ1IjoiZnJkMjZ4IiwiYSI6ImNqcnQ4ZGFzMjF4dDA0M3BzOWg4NGNlem4ifQ.SgF_HKYViz0-nlirZ9Ksag",
+      `${position}`,
+      function(err, data) {
+
+        const newUser = new User({
+          username,
+          password: hashPass,
+          position,
+          loc: {
+            type: "Point",
+            coordinates: data.features[0].center
+          }
+ });
+ newUser.save()
+ .then(() => {
+   res.redirect("/");
+ })
+ .catch(err => {
+   res.render("auth/signup", { message: "Something went wrong" });
+ })
+
 
 router.get('/signup-done', (req,res,next)=>{
   res.render('auth/signup-done')
@@ -109,7 +134,7 @@ router.get('/confirm/:confirmationCode', (req,res,next)=>{
       else res.render('auth/confirmation-failed')
     })
     .catch(err => next(err))
-})
+});
 
 router.get("/logout", (req, res) => {
   req.logout();
