@@ -1,27 +1,31 @@
-<h1>Profile</h1><br>
-<h3>Username: {{user.username}}</h3> <br>
-<h3>Email: {{user.email}}</h3> <br>
-<br>
+<h1 class="pt-5">Profile</h1>
+<p>{{user.username}}</p> <br>
 
-<div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fas fa-calendar-alt"> Events</i>
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">join</a>
-    <a class="dropdown-item" href="#">add-events</a>
+<h2 class="pt-5">Joined Events</h2>
+  <hr>
+<div class="card" style="width: 100%;">
+  {{#each join}}
+  <div class="card-body">
+    <h5 class="card-title">{{_event._game.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{_event.address}}</h6>
+    <p class="card-text"><strong>Description:</strong> {{_event.description}}</p>
+    <p class="card-text"> <strong>Date:</strong> {{_event.date}}</p>
+    <p class="card-text"><strong>Slots:</strong> {{_event.slot}}</p>
+    <a href="/cancel-event-join/{{_event._id}}" class="btn btn-danger">Cancel Join</a>
   </div>
-</div>
-
-
-<ul>{{#each join}}
-<li>{{_event.address}}</li>
-{{/each}}
-</ul>
-<br>
-<ul>
-  {{#each event}}
-  <li>{{address}}</li>
   {{/each}}
-</ul>
+</div>
+<h2 class="pt-5">My Events</h2> 
+<hr>
+<div class="card" style="width: 100%">
+  {{#each event}}
+  <div class="card-body">
+    <h5 class="card-title">{{_game.name}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{address}}</h6>
+    <p class="card-text"><strong>Description:</strong> {{description}}</p>
+    <p class="card-text"> <strong>Date:</strong> {{date}}</p>
+    <p class="card-text"><strong>Slots:</strong> {{slot}}</p>
+    <a href="/cancel-event/{{_id}}" class="btn btn-danger">Cancel Event</a>
+  </div>
+  {{/each}}
+  </div>  

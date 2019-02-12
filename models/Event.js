@@ -7,10 +7,8 @@ const eventSchema = new Schema({
     required: true
   },
   loc:{
-    type: {type:String},
-    coordinates: []
-
-
+    type: {type:String, enum:['Point'], default: "Point"},
+    coordinates: [Number]
   },
   date: {
     type: Date,
