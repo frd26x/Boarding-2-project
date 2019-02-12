@@ -229,7 +229,7 @@ router.get("/profile/:userId", (req, res, next) => {
     Event.find({ _user: req.params.userId }).populate('_game')
   ])
     .then(([user, join, event]) => {
-      console.log(user);
+      console.log(join);
       res.render("profile", { user, join, event });
     })
     .catch(err => console.log(err));

@@ -11,9 +11,9 @@
     <p class="card-text"><strong>Slots:</strong> {{slot}}</p>
     <p class="card-text"> <strong>Host:</strong> {{_user.username}}</p>
     {{#if this.isJoined}}
-    <a href="/cancel-event-join/{{this._id}}" class="btn btn-danger">Cancel Event</a>
+    <a href="/cancel-event-join/{{this._id}}" class="btn btn-danger">Cancel</a>
     {{else}}
-    <a href="/join-event/{{this._id}}" class="btn btn-success">Join Event</a>
+    <a href="/join-event/{{this._id}}" class="btn btn-success">Join</a>
     {{/if}}
   </div>
   {{/each}}
