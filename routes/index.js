@@ -5,12 +5,28 @@ const Event = require("../models/Event");
 const Join = require("../models/Join");
 const User = require("../models/User")
 const mapbox = require('../public/javascripts/geocode');
+const { checkConnectedAndActive } = require('../configs/middlewares')
 
 
 /* GET home page */
+
 router.get("/", (req, res, next) => {
   res.render("index");
 });
+
+router.get("/loginhomepage", (req, res, next) => {
+  res.render("loginhomepage");
+});
+
+
+
+// Checked if connected
+router.get('/profile', checkConnectedAndActive, (req,res,next)=> {
+  let user = req.user // When the user is connected, req.user is a document with the information of the logged in user
+  res.render('profile', {
+    user
+  })
+})
 
 //GET add-event page
 router.get("/add-event", (req, res, next) => {
