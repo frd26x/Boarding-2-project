@@ -223,19 +223,19 @@ let games = [
   }
 ];
 
-User.deleteMany()
-  .then(() => {
-    return User.create(users);
-  })
-  .then(usersCreated => {
-    console.log(`${usersCreated.length} users created with the following id:`);
-    console.log(usersCreated.map(u => u._id));
-  })
-  .then(() => {
-    // Close properly the connection to Mongoose
-    mongoose.disconnect();
-  })
-  .catch(err => {
-    mongoose.disconnect();
-    throw err;
-  });
+  User.deleteMany()
+.then(() => {
+  return User.create(users)
+})
+.then(usersCreated => {
+  console.log(`${usersCreated.length} users created with the following id:`);
+  console.log(usersCreated.map(u => u._id));
+})
+.then(() => {
+  // Close properly the connection to Mongoose
+  mongoose.disconnect()
+})
+.catch(err => {
+  mongoose.disconnect()
+  throw err
+})

@@ -58,6 +58,31 @@ hbs.registerHelper('ifUndefined', (value, options) => {
       return options.fn(this);
   }
 });
+
+hbs.registerHelper('formatDate', (value, options) => {
+  try {
+    return value.toISOString().substr(0,16)
+  }
+  catch (err) {
+    return "formatDate had a problem..."
+  }
+  // if (arguments.length < 2)
+  //     throw new Error("Handlebars Helper ifUndefined needs 1 parameter");
+  // if (typeof value !== undefined ) {
+  //     return options.inverse(this);
+  // } else {
+  //     return options.fn(this);
+  // }
+});
+hbs.registerHelper('formatDateProfile', (value, options) => {
+  try {
+    return value.toISOString().substr(0,10)
+  }
+  catch (err) {
+    return "formatDate had a problem..."
+  }
+  
+});
   
 
 // default value for title local
