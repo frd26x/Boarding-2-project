@@ -3,55 +3,65 @@
 <p>registered since {{user.created_at}}</p>
 
 <div class="flex-column d-flex justify-content-center">
-<label for="customRange1">Distance</label>
-<p id="rangeValue"></p>
-<input type="range" class="custom-range" id="customRange1" value="10" min="1" max="100">
+  <label for="customRange1">Distance</label>
+  <p id="rangeValue"></p>
+  <input type="range" class="custom-range" id="customRange1" value="10" min="1" max="100">
 </div>
 <a href="/update-range-user" id="link-range-update" class="btn btn-success">Submit</a>
 
 
 <div class="d-flex justify-content-center flex-wrap">
-<div class="card ml-4 mt-4 mb-4" style="width: 18rem;">
+  <div class="card ml-4 mt-4 mb-4" style="width: 18rem;">
 <h2 class="pt-5">Joined Events</h2>
-  <hr>
-  {{#each join}}
-  <div class="card-body">
-    <h5 class="card-title">{{_event._game.name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{{_event.address}}</h6>
-    <p class="card-text"><strong>Description:</strong> {{_event.description}}</p>
-    <p class="card-text"> <strong>Date:</strong> {{_event.date}}</p>
-    <p class="card-text"><strong>Slots:</strong> {{_event.slot}}</p>
-    <a href="/cancel-event-join/{{_event._id}}" class="btn btn-danger">Cancel</a>
-  </div>
-  {{/each}}
-</div>
-<div class="card ml-4 mt-4 mb-4" style="width: 18rem;">
-<h2 class="pt-5">My Events</h2> 
 <hr>
-  {{#each event}}
-  <div class="card-body">
-    <h5 class="card-title">{{_game.name}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{{address}}</h6>
-    <p class="card-text"><strong>Description:</strong> {{description}}</p>
-    <p class="card-text"> <strong>Date:</strong> {{date}}</p>
-    <p class="card-text"><strong>Slots:</strong> {{slot}}</p>
-    <a href="/cancel-event/{{_id}}" class="btn btn-danger">Cancel Event</a>
+    {{#each join}}
+    <div class="card-body">
+      <h5 class="card-title">{{_event._game.name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{_event.address}}</h6>
+      <p class="card-text"><strong>Description:</strong> {{_event.description}}</p>
+      <p class="card-text"> <strong>Date:</strong> {{_event.date}}</p>
+      <p class="card-text"><strong>Slots:</strong> {{_event.slot}}</p>
+      <a href="/cancel-event-join/{{_event._id}}" class="btn btn-danger">Cancel</a>
+    </div>
+    {{/each}}
   </div>
-  {{/each}}
-  </div>  
+  <div class="card ml-4 mt-4 mb-4" style="width: 18rem;">
+
+    <h2 class="pt-5">My Events</h2>
+    <hr>
+    {{#each event}}
+    <div class="card-body">
+      <h5 class="card-title">{{_game.name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{address}}</h6>
+      <p class="card-text"><strong>Description:</strong> {{description}}</p>
+      <p class="card-text"> <strong>Date:</strong> {{date}}</p>
+      <p class="card-text"><strong>Slots:</strong> {{slot}}</p>
+      <a href="/cancel-event/{{_id}}" class="btn btn-danger">Cancel Event</a>
+    </div>
+    {{/each}}
+  </div>
 </div>
-  <script>
+<script>
+
+
+
+
+  
+
+
+
+
     
    var output = document.getElementById('rangeValue')
-   var slider = document.getElementById('customRange1')
-   
-   output.innerHTML = slider.value; // Display the default slider value
+      var slider = document.getElementById('customRange1')
 
-// Update the current slider value (each time you drag the slider handle)
-slider.oninput = function() {
-  output.innerHTML = this.value;
-  document.getElementById('link-range-update').setAttribute("href", `/update-maxDistance-user/${this.value}`)
-}
+      output.innerHTML = slider.value; // Display the default slider value
+
+      // Update the current slider value (each time you drag the slider handle)
+      slider.oninput = function () {
+        output.innerHTML = this.value;
+        document.getElementById('link-range-update').setAttribute("href", `/update-maxDistance-user/${this.value}`)
+      }
 
 
-  </script>
+</script>
