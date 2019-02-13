@@ -42,21 +42,6 @@
   </div>
 </div>
 
-<<<<<<< HEAD
-<div class="d-flex justify-content-center flex-wrap">
-  <div class="card ml-4 mt-4 mb-4" style="width: 18rem;">
-
-    <h2 class="pt-5">My Events</h2>
-    <hr>
-    {{#each event}}
-    <div class="card-body">
-      <h5 class="card-title">{{_game.name}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{address}}</h6>
-      <p class="card-text"><strong>Description:</strong> {{description}}</p>
-      <p class="card-text"> <strong>Date:</strong> {{date}}</p>
-      <p class="card-text"><strong>Slots:</strong> {{slot}}</p>
-      <a href="/cancel-event/{{_id}}" class="btn btn-danger">Cancel Event</a>
-=======
 
 
 <div class="w-50 mx-auto">
@@ -77,29 +62,18 @@
         <a href="/event/{{_id}}" class="card-link mr-5">Details</a>
         <a href="/cancel-event-join/{{_id}}" class="btn btn-danger">Cancel</a>
       </div>
->>>>>>> 33a829add3446b11045196b6ae0db3524c4b04d9
     </div>
     {{/each}}
   </div>
 </div>
-<<<<<<< HEAD
-<script>
-
-=======
 
 <script>
->>>>>>> 33a829add3446b11045196b6ae0db3524c4b04d9
-
   var output = document.getElementById('rangeValue')
   var slider = document.getElementById('customRange1')
-
   output.innerHTML = slider.value; // Display the default slider value
-
   // Update the current slider value (each time you drag the slider handle)
   slider.oninput = function () {
     output.innerHTML = this.value;
     document.getElementById('link-range-update').setAttribute("href", `/update-maxDistance-user/${this.value}`)
   }
-
-
 </script>

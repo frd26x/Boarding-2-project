@@ -7,7 +7,6 @@ const User = require("../models/User");
 const mapbox = require("../public/javascripts/geocode");
 
 /* GET home page */
-
 router.get("/", (req, res, next) => {
   res.render("index");
 });

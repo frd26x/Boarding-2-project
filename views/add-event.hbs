@@ -49,12 +49,9 @@
     center: [-79.4512, 43.6568],
     zoom: 13
   });
-
   var geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken
   });
-
   document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
   document.getElementById('geocoder').firstChild.childNodes[1].setAttribute("name", 'address')
-
 </script>
