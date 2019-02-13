@@ -32,10 +32,7 @@ const gameSchema = new Schema({
       "Word",
     ]
   },
-  _event: {
-    type: Schema.Types.ObjectId,
-    ref: "Event"
-  },
+  
   description: String
   
 });

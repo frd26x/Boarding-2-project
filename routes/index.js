@@ -19,7 +19,6 @@ router.get("/add-event", (req, res, next) => {
     res.redirect("/auth/login");
     return;
   }
-
   Game.find().then(games => {
     res.render("add-event", { games });
   });
