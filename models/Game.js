@@ -19,6 +19,7 @@ const gameSchema = new Schema({
       "Eurogame",
       "Fantasy",
       "Guessing",
+      "Murder mystery",
       "Negotiation",
       "Non competitive",
       "Paper and Pencil",
